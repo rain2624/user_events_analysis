@@ -1,4 +1,4 @@
-# User Interaction Analytics
+# User Events Analysis
 
 ## 1. Project Overview
 This project builds an automated, event-driven data pipeline on AWS using a **7-days (19/09/2026 - 25/09/2026) simulated dataset that replicates real-world e-commerce user activity**. The pipeline instantly captures, cleans, and optimizes these user-interaction events as they happen, moving the data seamlessly from raw files to analytics-ready tables.
