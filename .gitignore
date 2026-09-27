@@ -1,0 +1,7 @@
+**/__pycache__/
+**.terraform/
+**.terraform.*
+*.tfstate
+*.tfstate.*
+/terraform_aws/variable.tf
+
