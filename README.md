@@ -16,9 +16,10 @@ Traditional data pipelines process data in slow, rigid batches instead of real t
 - Simplify Analytics: Expose clean data directly to analysts through AWS Glue Data Catalog and Amazon Athena.
 
 ## 4. Core System Qualities: 
-1. Idempotency: Implemented using the Apache Iceberg table format, ensuring that if a PySpark job retries or processes the same batch twice, it avoids duplicate data appends and maintains atomic commit consistency.
-2. Decoupled Scalability: Separating infrastructure state (Terraform), ingestion routing (AWS Lambda), and data compute tasks (AWS Glue) prevents processing bottlenecks during sudden user-traffic surges.
-3. Fault-Tolerant Observability: Built-in programmatic exception catching using custom Python logging dumps stack traces directly into Amazon CloudWatch, making the system fully auditable.
+1. **Idempotency**: Implemented using the Apache Iceberg table format, ensuring that if a PySpark job retries or processes the same batch twice, it avoids duplicate data appends and maintains atomic commit consistency.
+2. **Decoupled Scalability**: Separating infrastructure state (Terraform), ingestion routing (AWS Lambda), and data compute tasks (AWS Glue) prevents processing bottlenecks during sudden user-traffic surges.
+3. **Fault-Tolerant Observability**: Built-in programmatic exception catching using custom Python logging dumps stack traces directly into Amazon CloudWatch, making the system fully auditable.
+4. **Late Data Handling (Out-of-Order Processing)**: Leverages Apache Iceberg’s row-level transactional updates. When delayed e-commerce interaction logs arrive, the Silver script handles row-level deduplication using the event_id, while the Gold scripts execute transactional upserts or merges directly matching your analytical grain (Day, Product ID, and Country). This ensures historical metrics are updated accurately without causing duplicate entries or requiring full partition rewrites.
 
 ## 5. Architecture Overview
 
